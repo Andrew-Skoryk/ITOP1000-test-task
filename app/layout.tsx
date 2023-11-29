@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="flex min-h-screen">
+      <body className="flex min-h-screen bg-slate-50">
         <Provider>
           <Header />
 
