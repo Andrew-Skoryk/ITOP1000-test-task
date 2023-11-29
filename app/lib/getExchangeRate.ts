@@ -2,7 +2,7 @@
 
 export async function getExchangeRate(baseCurrency: string, targetCurrency: string) {
   const apiKey = process.env.EXCHANGERATE_API_KEY;
-  let url = `https://v6.exchangerate-api.com/v6/${apiKey}/pair/${baseCurrency}/${targetCurrency}`;
+  const url = `https://v6.exchangerate-api.com/v6/${apiKey}/pair/${baseCurrency}/${targetCurrency}`;
 
   try {
     const response = await fetch(url, {
