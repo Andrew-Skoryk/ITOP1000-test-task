@@ -6,7 +6,7 @@ export async function fetchExchangeRate() {
 
   try {
     const response = await fetch(url, {
-      next: { revalidate: 3600 * 5 } 
+      next: { revalidate: 3600 * 5 } // 5 hr caching
     });
 
     if (response.ok) {
