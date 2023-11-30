@@ -1,36 +1,19 @@
-"use client";
+import { fetchExchangeRate } from "@/app/lib/fetchExchangeRate";
 
-import { useEffect, useState } from "react";
-
-import { getExchangeRate } from "@/app/lib/getExchangeRate";
 import HeaderCurrencyBlock from "../HeaderCurrencyBlock";
 
-function Header() {
-  const [usdRate, setUsdRate] = useState<number | null>(null);
-  const [eurRate, setEurRate] = useState<number | null>(null);
+async function Header() {
+  const { conversion_rates } = await fetchExchangeRate();
 
-  useEffect(() => {
-    // getExchangeRate("USD", "UAH").then((data) => {
-    //   if (!data.error) {
-    //     setUsdRate(data.conversion_rate);
-    //   }
-    // });
-
-    // getExchangeRate("EUR", "UAH").then((data) => {
-    //   if (!data.error) {
-    //     setEurRate(data.conversion_rate);
-    //   }
-    // });
-    setUsdRate(36.3382);
-    setEurRate(39.7989);
-  }, []);
+  const usdRate = (1 / conversion_rates["USD"]).toFixed(4);
+  const eurRate = (1 / conversion_rates["EUR"]).toFixed(4);
 
   return (
     <div className="w-full bg-purple-600 text-slate-50">
-      <div className="container flex p-8">
+      <div className="container relative flex p-8 mx-auto">
         <h1 className="text-3xl font-bold tracking-wide">Курси валют</h1>
 
-        <div className="flex self-end mx-auto text-lg font-medium gap-14">
+        <div className="absolute flex self-end text-lg font-medium -translate-x-1/2 gap-14 left-1/2">
           <HeaderCurrencyBlock rate={usdRate} currency={"USD"} />
 
           <HeaderCurrencyBlock rate={eurRate} currency={"EUR"} />

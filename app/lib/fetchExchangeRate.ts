@@ -1,8 +1,8 @@
 "use server";
 
-export async function getExchangeRate(baseCurrency: string, targetCurrency: string) {
+export async function fetchExchangeRate() {
   const apiKey = process.env.EXCHANGERATE_API_KEY;
-  const url = `https://v6.exchangerate-api.com/v6/${apiKey}/pair/${baseCurrency}/${targetCurrency}`;
+  const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/UAH`;
 
   try {
     const response = await fetch(url, {
@@ -16,9 +16,9 @@ export async function getExchangeRate(baseCurrency: string, targetCurrency: stri
     } else {
       const errorData = await response.json();
 
-      return { error: errorData['error-type'] };
+      return { error: errorData["error-type"] };
     }
   } catch (error) {
-    return { error: 'network-error' };
+    return { error: "network-error" };
   }
 }
