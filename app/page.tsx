@@ -13,7 +13,7 @@ export default function Home() {
 
         <Equal className="self-end pb-1" size={45} color="#6b21a8" />
 
-        <CurrencyForm />
+        <CurrencyForm reverse />
       </section>
     </main>
   );

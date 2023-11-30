@@ -2,10 +2,17 @@
 
 import { Select, SelectItem, Input } from "@nextui-org/react";
 import { currenciesList } from "../../config/currenciesList";
+import { cn } from "../../lib/utils";
 
-function CurrencyForm() {
+type Props = {
+  reverse?: boolean;
+}
+
+function CurrencyForm({ reverse }: Props) {
   return (
-    <form className="flex gap-1.5">
+    <form className={cn("flex gap-1.5", {
+      "flex-row-reverse": reverse
+    })}>
       <Select
         label="Валюта"
         labelPlacement="outside"
