@@ -9,8 +9,9 @@ import { currenciesList } from "../../config/currenciesList";
 import { Select, SelectItem, Input, Tooltip } from "@nextui-org/react";
 
 type Props = {
-  reverse?: boolean;
   onSubmit: (data: IFormData) => void;
+  value?: number;
+  reverse?: boolean;
 };
 
 type OverlayPlacement =
@@ -27,7 +28,7 @@ type OverlayPlacement =
   | "right-start"
   | "right-end";
 
-function CurrencyForm({ reverse, onSubmit }: Props) {
+function CurrencyForm({ reverse, onSubmit, value }: Props) {
   const {
     register,
     handleSubmit,
@@ -75,6 +76,7 @@ function CurrencyForm({ reverse, onSubmit }: Props) {
       </Tooltip>
 
       <Input
+        value={value?.toString()}
         type="number"
         label="Кількість"
         labelPlacement="outside"
