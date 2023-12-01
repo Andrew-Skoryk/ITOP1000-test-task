@@ -24,25 +24,34 @@ function CurrencyForm({ reverse, onSubmit, value }: Props) {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm<IFormData>();
 
   useEffect(() => {
     setValue("amount", value);
     setLocalAmount(value);
-    console.log(value);
   }, [value, setValue]);
 
   const debouncedSubmit = useMemo(
     () =>
-      debounce((amount) => {
-        handleSubmit((formData) => onSubmit({ ...formData, amount }))();
+      debounce((formData: IFormData) => {
+        handleSubmit(() => onSubmit(formData))();
       }, 400),
     [handleSubmit, onSubmit]
   );
 
-  const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setLocalAmount(+e.target.value);
-    debouncedSubmit(+e.target.value);
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const name = e.target.name as "currency" | "amount";
+    const value = e.target.value;
+
+    if (name === "amount") {
+      setLocalAmount(Number(value));
+    }
+
+    setValue(name, value);
+    debouncedSubmit({ ...watch(), [name]: value });
   };
 
   return (
@@ -66,6 +75,7 @@ function CurrencyForm({ reverse, onSubmit, value }: Props) {
       >
         <Select
           {...register("currency", { required: "Це поле обов'язкове" })}
+          onChange={handleInputChange}
           label="Валюта"
           labelPlacement="outside"
           color="secondary"
@@ -89,7 +99,7 @@ function CurrencyForm({ reverse, onSubmit, value }: Props) {
       <Input
         {...register("amount")}
         value={localAmount?.toString()}
-        onChange={handleAmountChange}
+        onChange={handleInputChange}
         type="number"
         label="Кількість"
         labelPlacement="outside"
