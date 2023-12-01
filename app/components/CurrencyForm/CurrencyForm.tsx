@@ -98,7 +98,9 @@ function CurrencyForm({ reverse, onSubmit, value }: Props) {
 
       <Input
         {...register("amount")}
-        value={localAmount?.toString()}
+        value={
+          typeof localAmount === "number" ? localAmount.toFixed(2) : localAmount
+        }
         onChange={handleInputChange}
         type="number"
         label="Кількість"
