@@ -6,12 +6,12 @@ async function Home() {
   const { conversion_rates } = await fetchExchangeRate();
 
   return (
-    <main className="container flex flex-col items-center gap-12 p-12 mx-auto grow">
+    <main className="container flex flex-col items-center gap-12 p-20 mx-auto grow">
       <h2 className="text-5xl font-bold tracking-wider text-purple-800">
         Конвертер валют
       </h2>
 
-      <CurrencyConverter />
+      <CurrencyConverter conversionRates={conversion_rates} />
     </main>
   );
 }
