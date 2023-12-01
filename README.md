@@ -18,7 +18,7 @@ This project is a simple currency converter that allows users to convert amounts
 ## Setup and Installation
 1. Clone the repository:
 ```bash
-git clone https://github.com/Andrew-Skoryk/ITOP1000-test-task
+git clone https://github.com/Andrew-Skoryk/ITOP1000-test-task.git
 ```
 2. Install dependencies:
 ```bash
